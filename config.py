@@ -1,21 +1,20 @@
-# config.py - Configuración centralizada
+import os
 
 class Config:
-    """Configuración base para el entorno de desarrollo y producción."""
+    """Configuración que lee las variables desde Render"""
     
-    # --- 1. SEGURIDAD Y SESIÓN (OBLIGATORIO) ---
-    # La clave que generaste para la sesión.
-    SECRET_KEY = '698854dde8f9873df66f42337294a493d6c4624faeeac086281e9cf0d31eb8fe'
+    # 1. SEGURIDAD
+    # Intenta leer la clave de Render, si no la encuentra, usa una por defecto (para pruebas)
+    SECRET_KEY = os.environ.get('SECRET_KEY', 'clave-secreta-por-defecto-123')
     
-    # Contraseña para el panel de administración. ¡CAMBIA ESTO!
-    ADMIN_PASSWORD = 'JESUS_VIVE_POR_SIEMPRE' 
+    # 2. PANEL DE ADMINISTRACIÓN
+    ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'admin123')
 
-    # --- 2. CONFIGURACIÓN DE CORREO ---
-    # Tu correo de administrador (usado para enviar y recibir notificaciones).
-    ADMIN_EMAIL = 'mathiascapote148@gmail.com'
-
-    # Clave de aplicación de 16 caracteres de Google. ¡CAMBIA ESTO!
-    MAIL_PASSWORD = 'eyic xihr nmgj gyan' 
+    # 3. CORREO
+    ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL', 'mathiascapote148@gmail.com')
+    
+    # Aquí está la magia: Lee la contraseña de aplicación de las variables de Render
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 587
