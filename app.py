@@ -17,38 +17,57 @@ ADMIN_EMAIL = app.config['ADMIN_EMAIL']
 mail = Mail(app)
 
 # --- FUNCIÓN DE NOTIFICACIÓN AUTOMÁTICA ---
-def enviar_notificacion_admin(nombre, correo, asunto, mensaje):
-    """Envía un correo a ADMIN_EMAIL para notificar sobre un nuevo mensaje."""
+# app.py
+# ...
+
+def enviar_notificacion_admin(nombre, correo_cliente, asunto, mensaje):
+    """
+    Guarda el mensaje y solo intenta enviarlo si se detecta la contraseña.
+    Esto soluciona el TIMEOUT causado por el intento fallido de conexión a Gmail.
+    """
+    
+    # La clave de aplicación de Google
+    clave_de_app = app.config.get('MAIL_PASSWORD')
+    
+    # 1. Guardar el mensaje en el archivo (¡Esto siempre funciona!)
     try:
-        html_body = f"""
-        <html>
-        <body>
-            <h3>¡Nuevo Mensaje de Contacto en Oasis Web!</h3>
-            <p><strong>De:</strong> {nombre} ({correo})</p>
-            <p><strong>Asunto:</strong> {asunto}</p>
-            <hr>
-            <p><strong>Mensaje:</strong></p>
-            <p style="white-space: pre-wrap; background-color: #f4f4f9; padding: 10px; border: 1px solid #ddd;">{mensaje}</p>
-            <p><strong>Fecha/Hora:</strong> {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
-            <hr>
-            <p>Puedes responder a este correo directamente desde tu bandeja de entrada.</p>
-        </body>
-        </html>
-        """
-
-        msg = Message(
-            subject=f"[OASIS WEB] Nuevo mensaje: {asunto}",
-            recipients=[ADMIN_EMAIL], # Te lo envías a ti mismo
-            html=html_body,
-            sender=ADMIN_EMAIL
-        )
-        mail.send(msg)
-        return True
+        if not os.path.exists('mensajes'):
+            os.makedirs('mensajes')
+            
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        with open('mensajes/mensajes.txt', 'a') as f:
+            f.write(f"\n--- {timestamp} ---\n")
+            f.write(f"Nombre: {nombre}\n")
+            f.write(f"Correo: {correo_cliente}\n")
+            f.write(f"Asunto: {asunto}\n")
+            f.write(f"Mensaje: {mensaje}\n")
+        
     except Exception as e:
-        # Esto es importante: si falla el correo, lo registramos pero no rompemos la web.
-        print(f"ADVERTENCIA: Fallo al enviar correo de notificación al administrador: {e}")
+        # Si el guardado falla, detenemos el proceso
+        print(f"Error al guardar el mensaje en el archivo: {e}")
         return False
-
+        
+    # 2. Bloque de Envío de Correo (El código que tanto nos costó)
+    if clave_de_app and len(clave_de_app) == 16:
+        # Ejecutar el envío SOLO si la clave es válida y de 16 caracteres
+        try:
+            msg = Message(subject=f'Nuevo mensaje de {nombre}: {asunto}',
+                          sender=app.config['ADMIN_EMAIL'],
+                          recipients=[app.config['ADMIN_EMAIL']])
+            msg.body = f"Nombre: {nombre}\nCorreo: {correo_cliente}\n\n{mensaje}"
+            
+            mail.send(msg)
+            print("✅ Correo enviado con éxito.")
+            return True
+        except Exception as e:
+            # Si hay error en el envío (problema de Google, no nuestro código)
+            print(f"❌ ERROR CRÍTICO AL INTENTAR CONECTARSE A GMAIL: {e}")
+            return False
+    else:
+        # Pausa Inteligente: Si no tenemos la clave correcta, devolvemos True
+        # para que la web no dé error y el mensaje quede guardado en mensajes.txt
+        print("⏸️ Correo PAUSADO: Clave de Google no válida. Mensaje GUARDADO localmente.")
+        return True
 
 # --- RUTAS DEL SITIO WEB ---
 
