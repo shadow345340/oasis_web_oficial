@@ -1,0 +1,265 @@
+/* static/style.css - CÓDIGO MEJORADO v2 */
+
+:root {
+    --primary-color: #2c3e50; /* Azul oscuro elegante */
+    --secondary-color: #3498db; /* Azul más claro */
+    --background-light: #f4f4f9; /* Gris muy suave */
+    --text-color: #333;
+    --light-text: #fff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #fff;
+    /* Sticky Footer: Esto asegura que el footer siempre esté abajo */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+/* --- Encabezado (Header) --- */
+header {
+    background-color: var(--primary-color);
+    color: var(--light-text);
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+nav .logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: var(--light-text);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--secondary-color);
+}
+
+/* --- Ajuste de Contenido Principal --- */
+/* Esto soluciona la barra blanca. El padding se aplica internamente */
+.page-content {
+    padding-top: 80px; /* Espacio para la barra fija */
+    background-color: #fff; /* Por defecto blanco */
+}
+
+/* Clase especial para páginas con fondo gris completo (Contacto y Eventos) */
+.full-bg-light {
+    background-color: var(--background-light);
+    min-height: 100vh; /* Asegura que cubra toda la pantalla */
+}
+
+.container {
+    max-width: 960px;
+    margin: auto;
+    padding: 0 2rem;
+}
+
+.section {
+    padding: 4rem 0;
+}
+
+h1, h2, h3 {
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+/* --- Hero Section (Inicio) --- */
+.hero {
+    height: 100vh;
+    /* Imagen de fondo inspiradora */
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://source.unsplash.com/random/1920x1080/?worship,concert') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--light-text);
+    margin-top: -80px; /* Compensa el header fijo en la home */
+    padding-top: 80px;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    color: var(--light-text);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: var(--light-text);
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.cta-button:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+}
+
+/* --- Galería con Captions --- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding-top: 1rem;
+}
+
+.gallery-item {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-caption {
+    padding: 1rem;
+    text-align: center;
+}
+
+.gallery-caption h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.gallery-caption p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* --- Eventos y Horarios --- */
+.event-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.event-item {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    border-top: 4px solid var(--secondary-color);
+}
+
+/* --- Contacto --- */
+.contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: center;
+}
+
+.contact-form-container, .contact-details {
+    flex: 1;
+    min-width: 300px;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+/* --- Footer (Pie de página) ARREGLADO --- */
+footer {
+    background-color: var(--primary-color); /* Fondo azul oscuro */
+    color: var(--light-text); /* Texto blanco */
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: auto; /* Empuja el footer al fondo si hay poco contenido */
+}
+
+/* --- Móvil --- */
+@media (max-width: 768px) {
+    nav { flex-direction: column; padding: 1rem; }
+    nav ul { margin-top: 1rem; justify-content: center; flex-wrap: wrap; }
+    nav ul li { margin: 0 10px; }
+    .hero-content h1 { font-size: 2.5rem; }
+}

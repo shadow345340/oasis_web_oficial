@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Mensajes - Panel de Administración{% endblock %}
+
+{% block main_class %}page-content{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h2>Mensajes Recibidos</h2>
+        
+        <p>Los nuevos mensajes de contacto te llegan directamente a tu Gmail. Esta es una copia de seguridad:</p>
+
+        {% if request.args.get('exito') %}<p style="color: green;">{{ request.args.get('exito') }}</p>{% endif %}
+        {% if request.args.get('error') %}<p style="color: red;">{{ request.args.get('error') }}</p>{% endif %}
+
+        <div class="message-container" style="white-space: pre-wrap; background-color: #f0f0f0; padding: 2rem; border-radius: 8px; margin-bottom: 30px; border: 1px solid #ccc;">
+            {{ mensajes }}
+        </div>
+        
+    </div>
+</section>
+{% endblock %}

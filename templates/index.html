@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio - Oasis Internacional{% endblock %}
+
+{% block content %}
+<section id="inicio" class="hero">
+    <div class="hero-content">
+        <h1>Bienvenido a Oasis Internacional</h1>
+        <p>Un lugar donde la fe florece y las vidas son transformadas.</p>
+        <a href="{{ url_for('eventos') }}" class="cta-button">Ver eventos</a>
+    </div>
+</section>
+{% endblock %}

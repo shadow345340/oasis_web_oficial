@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Horarios y Eventos - Oasis Internacional{% endblock %}
+
+{% block main_class %}page-content full-bg-light{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        
+        <h2>Nuestros Horarios</h2>
+        <p style="text-align: center; margin-bottom: 3rem;">Nos reunimos semanalmente para buscar el rostro de Dios. ¡Te esperamos en casa!</p>
+        
+        <div class="event-list">
+            <div class="event-item">
+                <h3>Servicio Dominical</h3>
+                <p style="font-size: 1.5rem; font-weight: bold; color: #3498db;">Domingos 9:30 AM</p>
+                <p>Nuestro tiempo principal de celebración, adoración y palabra profética para la semana.</p>
+            </div>
+            <div class="event-item">
+                <h3>Servicio de Oración y Enseñanza</h3>
+                <p style="font-size: 1.5rem; font-weight: bold; color: #3498db;">Martes 5:30 PM</p>
+                <p>Un espacio para profundizar en las escrituras y fortalecer el espíritu en oración.</p>
+            </div>
+        </div>
+
+        <hr style="margin: 4rem 0; border: 0; border-top: 1px solid #ddd;">
+
+        <h2>Próximos Eventos Especiales</h2>
+        <p style="text-align: center;">Mantente atento a nuestras actividades</p>
+        
+        <div style="text-align: center; background: white; padding: 2rem; border-radius: 8px; max-width: 600px; margin: 2rem auto; border-left: 5px solid #f39c12;">
+            <h3>📢 Anuncios en Redes Sociales</h3>
+            <p>Por el momento, anunciamos nuestros congresos, vigilias y actividades especiales a través de Instagram.</p>
+            <a href="https://www.instagram.com/oasisint" target="_blank" class="cta-button" style="margin-top: 1rem;">Ver Agenda en Instagram</a>
+        </div>
+
+        <div style="text-align: center; margin-top: 4rem;">
+            <h3>¿No puedes asistir presencialmente?</h3>
+            <p>Escucha la palabra de Dios donde quiera que estés.</p>
+            <a href="https://t.me/OasisInternacional" target="_blank" class="cta-button">Canal de Telegram (Prédicas)</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
