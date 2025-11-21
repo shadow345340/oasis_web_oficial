@@ -12,15 +12,18 @@ class Config:
     # 3. CORREO
     ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL', 'mathiascapote148@gmail.com')
     
-    # --- CONFIGURACIÓN DE CORREO CORREGIDA (SSL) ---
-    # Usamos el puerto 465 con SSL para evitar el "Error de conexión/Timeout"
+    # --- CONFIGURACIÓN DE CORREO ESTÁNDAR (TLS - PUERTO 587) ---
     MAIL_SERVER = 'smtp.gmail.com'
-    MAIL_PORT = 465             # <--- CAMBIO IMPORTANTE: Puerto SSL
-    MAIL_USE_TLS = False        # <--- Apagamos TLS
-    MAIL_USE_SSL = True         # <--- Encendemos SSL (Más rápido y seguro)
+    MAIL_PORT = 587             # Volvemos al 587
+    MAIL_USE_TLS = True         # Encendemos TLS
+    MAIL_USE_SSL = False        # Apagamos SSL
     
     MAIL_USERNAME = ADMIN_EMAIL
-    # Lee la contraseña de 16 caracteres de las variables de Render
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    
     MAIL_DEFAULT_SENDER = ADMIN_EMAIL
+    
+    # DEBUG: Esto imprimirá en los logs si la contraseña fue leída correctamente
+    if not MAIL_PASSWORD:
+        print("⚠️ ADVERTENCIA: No se encontró la variable MAIL_PASSWORD en Render.")
+    else:
+        print("✅ ÉXITO: Se encontró una contraseña de correo configurada.")
