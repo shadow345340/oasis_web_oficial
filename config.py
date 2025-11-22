@@ -11,8 +11,7 @@ class Config:
 
     # 3. CORREO
     ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL', 'mathiascapote148@gmail.com')
-    
-    # --- CONFIGURACIÓN SSL (PUERTO 465) ---
+  # --- CONFIGURACIÓN SSL (PUERTO 465) ---
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 465             # Usamos 465
     MAIL_USE_TLS = False        # Apagamos TLS
@@ -21,7 +20,6 @@ class Config:
     MAIL_USERNAME = ADMIN_EMAIL
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     MAIL_DEFAULT_SENDER = ADMIN_EMAIL
-    
     # DEBUG
     if not MAIL_PASSWORD:
         print("⚠️ ALERTA: No hay contraseña de correo.")
