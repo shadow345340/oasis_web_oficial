@@ -4,7 +4,6 @@ import os
 from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, flash
 # Flask-Mail ya no se usará, pero lo dejamos por si quieres activarlo después
-from flask_mail import Mail, Message
 
 # Importar configuración
 from config import Config
@@ -14,7 +13,6 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 # Inicializar Flask-Mail (Mantenemos la inicialización por si la volvemos a usar)
-mail = Mail(app)
 
 # ----------------------------------------------------
 # Nota: La función enviar_notificacion_admin ha sido eliminada
